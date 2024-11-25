@@ -23,8 +23,6 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True, validators=[validate_password])
 
-
-
 class PasswordResetSerializer(serializers.Serializer):
     email = serializers.EmailField()
     def validate_email(self, value):
@@ -46,7 +44,6 @@ class PasswordResetSerializer(serializers.Serializer):
             [user.email],
         )
 
-
 class PasswordResetConfirmSerializer(serializers.Serializer):
     new_password = serializers.CharField(write_only=True)
     token = serializers.CharField()
@@ -67,7 +64,6 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         user = self.context['user']
         user.set_password(self.validated_data['new_password'])
         user.save()
-
 
 class ChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(write_only=True, required=True)
