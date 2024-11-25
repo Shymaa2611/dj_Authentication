@@ -93,13 +93,3 @@ class PasswordResetConfirmView(APIView):
             return Response({"message": "Password reset successful."}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class ChangePasswordView(APIView):
-    permission_classes = [IsAuthenticated]
-    permission_classes = [AllowAny]
-
-    def post(self, request, *args, **kwargs):
-        serializer = ChangePasswordSerializer(data=request.data, context={'request': request})
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"detail": "Password changed successfully."}, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
